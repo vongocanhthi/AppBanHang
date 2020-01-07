@@ -27,14 +27,11 @@ public class ChiTietActivity extends AppCompatActivity {
     GioHangAdapter gioHangAdapter;
     Toolbar toolbarChiTiet;
     ImageView imgChiTiet;
-    TextView tvTen,tvGia = (TextView) findViewById(R.id.tv_giachitietsanpham),tvMoTa;
+    TextView tvTen,tvGia,tvMoTa;
     Spinner spinner;
     Button btnDatMua;
-    int id=0;
-    String tenchitiet="";
-    int giachitiet=0;
-    String motachitiet="",hinhanhchitiet="";
-    int idsanpham=0;
+    int id=0, giachitiet=0, idsanpham=0;
+    String tenchitiet="", motachitiet="", hinhanhchitiet="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +51,7 @@ public class ChiTietActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(MainActivity.mangGioHang.size()>0){
                     int sl= Integer.parseInt(spinner.getSelectedItem().toString());
-                    boolean exsist=false;
+                    boolean exists=false;
                     for(int i=0;i<MainActivity.mangGioHang.size();i++){
                         if(MainActivity.mangGioHang.get(i).getIdsp()==id){
                             MainActivity.mangGioHang.get(i).setSoluongsp(MainActivity.mangGioHang.get(i).getSoluongsp()+sl);
@@ -62,10 +59,10 @@ public class ChiTietActivity extends AppCompatActivity {
                                 MainActivity.mangGioHang.get(i).setSoluongsp(10);
                             }
                             MainActivity.mangGioHang.get(i).setGiasp(giachitiet*sl+MainActivity.mangGioHang.get(i).getGiasp());
-                            exsist=true;
+                            exists=true;
                         }
                     }
-                    if(exsist==false){
+                    if(exists==false){
                         int soluong= Integer.parseInt(spinner.getSelectedItem().toString());
                         long giamoi=soluong*giachitiet;
                         MainActivity.mangGioHang.add(new GioHang(id,tenchitiet,giamoi,hinhanhchitiet,soluong));
@@ -77,18 +74,18 @@ public class ChiTietActivity extends AppCompatActivity {
                     MainActivity.mangGioHang.add(new GioHang(id,tenchitiet,giamoi,hinhanhchitiet,soluong));
                     gioHangAdapter.notifyDataSetChanged();
                 }
-                Intent intent=new Intent(ChiTietActivity.this,GioHangActivity.class);
+                Intent intent=new Intent(getApplicationContext(), GioHangActivity.class);
                 startActivity(intent);
             }
         });
     }
 
     private void eventSpinner() {
-        ArrayList<Integer> arr=new ArrayList<Integer>();
+        ArrayList<Integer> arr = new ArrayList<>();
         for(int i=1;i<=10;i++){
             arr.add(i);
         }
-        ArrayAdapter adapter=new ArrayAdapter(ChiTietActivity.this,android.R.layout.simple_spinner_item,arr);
+        ArrayAdapter adapter=new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, arr);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
@@ -101,12 +98,15 @@ public class ChiTietActivity extends AppCompatActivity {
         motachitiet=sanPham.getMotasanpham();
         hinhanhchitiet=sanPham.getHinhanhsanpham();
         idsanpham=sanPham.getIdsanpham();
+
         tvTen.setText(tenchitiet);
         tvMoTa.setText(motachitiet);
         DecimalFormat deci=new DecimalFormat("###,###,###");
         tvGia.setText("Giá "+deci.format(giachitiet)+" Đ");
         idsanpham=sanPham.getIdsanpham();
-        Picasso.with(ChiTietActivity.this).load(sanPham.getHinhanhsanpham()).error(R.drawable.error).into(imgChiTiet);
+        Picasso.with(getApplicationContext()).load(hinhanhchitiet)
+                .error(R.drawable.error)
+                .into(imgChiTiet);
     }
 
     private void eventactionBar() {
@@ -125,6 +125,7 @@ public class ChiTietActivity extends AppCompatActivity {
         toolbarChiTiet= findViewById(R.id.toolbar_chitietsanpham);
         imgChiTiet= findViewById(R.id.img_chitietsanpham);
         tvTen= findViewById(R.id.tv_tenchitietsanpham);
+        tvGia = findViewById(R.id.tv_giachitietsanpham);
         tvMoTa= findViewById(R.id.tv_motachitietsanpham);
         spinner= findViewById(R.id.spinner);
         btnDatMua= findViewById(R.id.btn_datmua);

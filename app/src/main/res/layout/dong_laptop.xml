@@ -35,14 +35,16 @@
                 android:id="@+id/tv_gialaptop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="gia dien thoai" />
+                android:text="gia laptop" />
             <TextView
-                android:text="mo ta dien thoai"
+                android:text="mo ta laptop"
                 android:layout_margin="5dp"
                 android:textSize="15sp"
                 android:id="@+id/tv_motalaptop"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:ellipsize="end"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

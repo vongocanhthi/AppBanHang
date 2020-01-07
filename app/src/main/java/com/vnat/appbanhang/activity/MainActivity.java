@@ -73,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        anhXa();
         if (CheckConnection.haveNetworkConnection(MainActivity.this)) {
+            anhXa();
             actionBar();
             addEventViewFlipper();
             getdulieuloaisp();
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                     case 1: {
                         if (CheckConnection.haveNetworkConnection(MainActivity.this)) {
                             Intent intent = new Intent(MainActivity.this, DienThoaiActivity.class);
-                            intent.putExtra("idloaisanpham", 1);
+                            intent.putExtra("iddienthoai", 1);
                             startActivity(intent);
                         } else {
                         }
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                     case 2: {
                         if (CheckConnection.haveNetworkConnection(MainActivity.this)) {
                             Intent intent = new Intent(MainActivity.this, LapTopActivity.class);
-                            intent.putExtra("idloaisanpham", 2);
+                            intent.putExtra("idlaptop", 2);
                             startActivity(intent);
                         } else {
                         }
@@ -234,9 +234,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewManHinhChinh.setHasFixedSize(true);
         recyclerViewManHinhChinh.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
         recyclerViewManHinhChinh.setAdapter(sanphamAdapter);
-        if (mangGioHang != null) {
-
-        } else {
+        if (mangGioHang == null) {
             mangGioHang = new ArrayList<>();
         }
     }

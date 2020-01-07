@@ -60,11 +60,13 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.itemHold
             imgHinhAnhSanpham=itemView.findViewById(R.id.img_sanpham);
             tvTensanpham=itemView.findViewById(R.id.tv_tensanpham);
             tvGiasanpham=itemView.findViewById(R.id.tv_giasanpham);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent=new Intent(context, ChiTietActivity.class);
                     intent.putExtra("chitietsanpham",arrayListSanpham.get(getPosition()));
+                    //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     Toast.makeText(context, arrayListSanpham.get(getPosition()).getTensanpham(), Toast.LENGTH_SHORT).show();
                     context.startActivity(intent);
                 }

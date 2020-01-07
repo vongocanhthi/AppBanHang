@@ -43,20 +43,33 @@ public class LapTopAdapter extends BaseAdapter {
         return i;
     }
 
+    public class ViewHolder{
+        TextView tvTen, tvMoTa, tvGia;
+        ImageView imgHinhanh;
+    }
+
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        view=layoutInflater.inflate(R.layout.dong_laptop,null);
-        TextView tvTen=view.findViewById(R.id.tv_laptop);
-        TextView tvMoTa=view.findViewById(R.id.tv_motalaptop);
-        TextView tvGia=view.findViewById(R.id.tv_gialaptop);
-        ImageView imgHinhanh=view.findViewById(R.id.img_laptop);
-        tvTen.setText(arrayLapTop.get(i).getTensanpham());
+        ViewHolder viewHolder;
+        if(view == null){
+            viewHolder = new ViewHolder();
+            LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view=layoutInflater.inflate(R.layout.dong_laptop,null);
+            viewHolder.tvTen = view.findViewById(R.id.tv_laptop);
+            viewHolder.tvGia=view.findViewById(R.id.tv_gialaptop);
+            viewHolder.tvMoTa=view.findViewById(R.id.tv_motalaptop);
+            viewHolder.imgHinhanh = view.findViewById(R.id.img_laptop);
+            view.setTag(viewHolder);
+        }else{
+            viewHolder = (ViewHolder) view.getTag();
+        }
+
         DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
-        tvGia.setText("Giá "+decimalFormat.format(arrayLapTop.get(i).getGiasanpham())+" Đ");
-        tvMoTa.setMaxLines(2);
-        tvMoTa.setText(arrayLapTop.get(i).getMotasanpham());
-        Picasso.with(context).load(arrayLapTop.get(i).getHinhanhsanpham()).centerCrop().resize(150,150).into(imgHinhanh);
+        SanPham sanPham = arrayLapTop.get(i);
+        viewHolder.tvTen.setText(sanPham.getTensanpham());
+        viewHolder.tvGia.setText("Giá "+decimalFormat.format(sanPham.getGiasanpham())+" Đ");
+        viewHolder.tvMoTa.setText(sanPham.getMotasanpham());
+        Picasso.with(context).load(sanPham.getHinhanhsanpham()).centerCrop().resize(150,150).into(viewHolder.imgHinhanh);
         return view;
     }
 
