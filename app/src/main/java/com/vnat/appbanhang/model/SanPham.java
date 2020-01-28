@@ -1,77 +1,97 @@
 package com.vnat.appbanhang.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
-/**
- * Created by Admin on 4/14/2018.
- */
-
 public class SanPham implements Serializable {
-    public int id;
-    public String tensanpham;
-    public int giasanpham;
-    public String hinhanhsanpham;
-    public String motasanpham;
-    public int idsanpham;
 
-    public SanPham() {
+@SerializedName("idsp")
+@Expose
+private Integer idsp;
+@SerializedName("tensp")
+@Expose
+private String tensp;
+@SerializedName("giasp")
+@Expose
+private Integer giasp;
+@SerializedName("hinhanhsp")
+@Expose
+private String hinhanhsp;
+@SerializedName("motasp")
+@Expose
+private String motasp;
+@SerializedName("idloaisp")
+@Expose
+private Integer idloaisp;
+@SerializedName("idhang")
+@Expose
+private Integer idhang;
 
+    public SanPham(Integer idsp, String tensp, Integer giasp, String hinhanhsp, String motasp, Integer idloaisp, Integer idhang) {
+        this.idsp = idsp;
+        this.tensp = tensp;
+        this.giasp = giasp;
+        this.hinhanhsp = hinhanhsp;
+        this.motasp = motasp;
+        this.idloaisp = idloaisp;
+        this.idhang = idhang;
     }
 
-    public SanPham(int id, String tensanpham, int giasanpham, String hinhanhsanpham, String motasanpham, int idsanpham) {
-        this.id = id;
-        this.tensanpham = tensanpham;
-        this.giasanpham = giasanpham;
-        this.hinhanhsanpham = hinhanhsanpham;
-        this.motasanpham = motasanpham;
-        this.idsanpham = idsanpham;
+    public Integer getIdsp() {
+        return idsp;
     }
 
-    public int getId() {
-        return id;
+    public void setIdsp(Integer idsp) {
+        this.idsp = idsp;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getTensp() {
+        return tensp;
     }
 
-    public String getTensanpham() {
-        return tensanpham;
+    public void setTensp(String tensp) {
+        this.tensp = tensp;
     }
 
-    public void setTensanpham(String tensanpham) {
-        this.tensanpham = tensanpham;
+    public Integer getGiasp() {
+        return giasp;
     }
 
-    public int getGiasanpham() {
-        return giasanpham;
+    public void setGiasp(Integer giasp) {
+        this.giasp = giasp;
     }
 
-    public void setGiasanpham(int giasanpham) {
-        this.giasanpham = giasanpham;
+    public String getHinhanhsp() {
+        return hinhanhsp;
     }
 
-    public String getHinhanhsanpham() {
-        return hinhanhsanpham;
+    public void setHinhanhsp(String hinhanhsp) {
+        this.hinhanhsp = hinhanhsp;
     }
 
-    public void setHinhanhsanpham(String hinhanhsanpham) {
-        this.hinhanhsanpham = hinhanhsanpham;
+    public String getMotasp() {
+        return motasp;
     }
 
-    public String getMotasanpham() {
-        return motasanpham;
+    public void setMotasp(String motasp) {
+        this.motasp = motasp;
     }
 
-    public void setMotasanpham(String motasanpham) {
-        this.motasanpham = motasanpham;
+    public Integer getIdloaisp() {
+        return idloaisp;
     }
 
-    public int getIdsanpham() {
-        return idsanpham;
+    public void setIdloaisp(Integer idloaisp) {
+        this.idloaisp = idloaisp;
     }
 
-    public void setIdsanpham(int idsanpham) {
-        this.idsanpham = idsanpham;
+    public Integer getIdhang() {
+        return idhang;
+    }
+
+    public void setIdhang(Integer idhang) {
+        this.idhang = idhang;
     }
 }

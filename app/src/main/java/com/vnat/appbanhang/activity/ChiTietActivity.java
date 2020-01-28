@@ -1,9 +1,7 @@
 package com.vnat.appbanhang.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +11,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.squareup.picasso.Picasso;
 import com.vnat.appbanhang.R;
@@ -46,37 +47,34 @@ public class ChiTietActivity extends AppCompatActivity {
     }
 
     private void addEvent() {
-        btnDatMua.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(MainActivity.mangGioHang.size()>0){
-                    int sl= Integer.parseInt(spinner.getSelectedItem().toString());
-                    boolean exists=false;
-                    for(int i=0;i<MainActivity.mangGioHang.size();i++){
-                        if(MainActivity.mangGioHang.get(i).getIdsp()==id){
-                            MainActivity.mangGioHang.get(i).setSoluongsp(MainActivity.mangGioHang.get(i).getSoluongsp()+sl);
-                            if(MainActivity.mangGioHang.get(i).getSoluongsp()>=10){
-                                MainActivity.mangGioHang.get(i).setSoluongsp(10);
-                            }
-                            MainActivity.mangGioHang.get(i).setGiasp(giachitiet*sl+MainActivity.mangGioHang.get(i).getGiasp());
-                            exists=true;
+        btnDatMua.setOnClickListener(view -> {
+            if(MainActivity.gioHangArrayList.size()>0){
+                int sl= Integer.parseInt(spinner.getSelectedItem().toString());
+                boolean exists=false;
+                for(int i=0;i<MainActivity.gioHangArrayList.size();i++){
+                    if(MainActivity.gioHangArrayList.get(i).getIdsp()==id){
+                        MainActivity.gioHangArrayList.get(i).setSoluongsp(MainActivity.gioHangArrayList.get(i).getSoluongsp()+sl);
+                        if(MainActivity.gioHangArrayList.get(i).getSoluongsp()>=10){
+                            MainActivity.gioHangArrayList.get(i).setSoluongsp(10);
                         }
+                        MainActivity.gioHangArrayList.get(i).setGiasp(giachitiet*sl+MainActivity.gioHangArrayList.get(i).getGiasp());
+                        exists=true;
                     }
-                    if(exists==false){
-                        int soluong= Integer.parseInt(spinner.getSelectedItem().toString());
-                        long giamoi=soluong*giachitiet;
-                        MainActivity.mangGioHang.add(new GioHang(id,tenchitiet,giamoi,hinhanhchitiet,soluong));
-                        gioHangAdapter.notifyDataSetChanged();
-                    }
-                }else{
+                }
+                if(!exists){
                     int soluong= Integer.parseInt(spinner.getSelectedItem().toString());
                     long giamoi=soluong*giachitiet;
-                    MainActivity.mangGioHang.add(new GioHang(id,tenchitiet,giamoi,hinhanhchitiet,soluong));
+                    MainActivity.gioHangArrayList.add(new GioHang(id,tenchitiet,giamoi,hinhanhchitiet,soluong));
                     gioHangAdapter.notifyDataSetChanged();
                 }
-                Intent intent=new Intent(getApplicationContext(), GioHangActivity.class);
-                startActivity(intent);
+            }else{
+                int soluong = Integer.parseInt(spinner.getSelectedItem().toString());
+                long giamoi = soluong * giachitiet;
+                MainActivity.gioHangArrayList.add(new GioHang(id,tenchitiet,giamoi,hinhanhchitiet,soluong));
+                gioHangAdapter.notifyDataSetChanged();
             }
+            Intent intent=new Intent(getApplicationContext(), GioHangActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -85,27 +83,27 @@ public class ChiTietActivity extends AppCompatActivity {
         for(int i=1;i<=10;i++){
             arr.add(i);
         }
-        ArrayAdapter adapter=new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, arr);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        spinner.setAdapter(new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, arr));
     }
 
     private void getInformation() {
         SanPham sanPham= (SanPham) getIntent().getSerializableExtra("chitietsanpham");
-        id=sanPham.getId();
-        tenchitiet=sanPham.getTensanpham();
-        giachitiet=sanPham.getGiasanpham();
-        motachitiet=sanPham.getMotasanpham();
-        hinhanhchitiet=sanPham.getHinhanhsanpham();
-        idsanpham=sanPham.getIdsanpham();
+        id=sanPham.getIdsp();
+        tenchitiet=sanPham.getTensp();
+        giachitiet=sanPham.getGiasp();
+        motachitiet=sanPham.getMotasp();
+        hinhanhchitiet=sanPham.getHinhanhsp();
+        idsanpham=sanPham.getIdloaisp();
 
         tvTen.setText(tenchitiet);
         tvMoTa.setText(motachitiet);
         DecimalFormat deci=new DecimalFormat("###,###,###");
         tvGia.setText("Giá "+deci.format(giachitiet)+" Đ");
-        idsanpham=sanPham.getIdsanpham();
-        Picasso.with(getApplicationContext()).load(hinhanhchitiet)
-                .error(R.drawable.error)
+        idsanpham=sanPham.getIdloaisp();
+        Picasso.with(getApplicationContext())
+                .load(hinhanhchitiet)
+                .placeholder(R.drawable.ic_no_image)
+                .error(R.drawable.ic_error)
                 .into(imgChiTiet);
     }
 
@@ -129,7 +127,7 @@ public class ChiTietActivity extends AppCompatActivity {
         tvMoTa= findViewById(R.id.tv_motachitietsanpham);
         spinner= findViewById(R.id.spinner);
         btnDatMua= findViewById(R.id.btn_datmua);
-        gioHangAdapter=new GioHangAdapter(ChiTietActivity.this,MainActivity.mangGioHang);
+        gioHangAdapter=new GioHangAdapter(getApplicationContext(),MainActivity.gioHangArrayList);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -140,7 +138,7 @@ public class ChiTietActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId()==R.id.menu_giohang){
-            Intent intent=new Intent(ChiTietActivity.this,GioHangActivity.class);
+            Intent intent=new Intent(getApplicationContext(),GioHangActivity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

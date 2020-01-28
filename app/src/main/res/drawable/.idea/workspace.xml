@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="786dec38-98d2-487b-bc56-1d4c370487f9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../debug/res/values/google_maps_api.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ic_error.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ic_location.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ic_new.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ic_no_image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ic_shopping_cart.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../release/res/values/google_maps_api.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/activity/ChiTietActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/activity/ChiTietActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/activity/DienThoaiActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/activity/DienThoaiActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/activity/GioHangActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/activity/GioHangActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/activity/KhachHangActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/activity/KhachHangActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/activity/LapTopActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/activity/LapTopActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/activity/LienHeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/activity/LienHeActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/activity/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/activity/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/activity/ThongTinActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/activity/ThongTinActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/adapter/DienThoaiAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/adapter/DienThoaiAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/adapter/GioHangAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/adapter/GioHangAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/adapter/LapTopAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/adapter/LapTopAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/adapter/LoaiSanPhamAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/adapter/LoaiSanPhamAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/adapter/SanPhamAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/adapter/SanPhamAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/model/SanPham.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/model/SanPham.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/ultil/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/vnat/appbanhang/ultil/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/basket.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/error.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newico.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newicons.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spinner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spinner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../layout/activity_dien_thoai.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../layout/activity_dien_thoai.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../layout/activity_khach_hang.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../layout/activity_khach_hang.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../layout/activity_lap_top.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../layout/activity_lap_top.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../layout/activity_lien_he.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../layout/activity_lien_he.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../layout/activity_thong_tin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../layout/activity_thong_tin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../layout/dong_laptop.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../layout/dong_laptop.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../layout/dong_sanphammoinhat.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../layout/dong_sanphammoinhat.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../menu/menu_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../menu/menu_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../values/styles.xml" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../../.." />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="10" />
+    <option name="y" value="20" />
+    <option name="width" value="1346" />
+    <option name="height" value="688" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="786dec38-98d2-487b-bc56-1d4c370487f9" name="Default Changelist" comment="" />
+      <created>1578933248699</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1578933248699</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" visible="true" weight="0.22247024" />
+      <window_info id="Structure" side_tool="true" />
+      <window_info id="Image Layers" />
+      <window_info id="Designer" />
+      <window_info id="Resources Explorer" />
+      <window_info id="Capture Tool" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info id="Captures" order="0" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="TODO" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="right" id="Capture Analysis" />
+      <window_info anchor="right" id="Theme Preview" />
+      <window_info anchor="right" id="Palette&#9;" />
+    </layout>
+  </component>
+</project>

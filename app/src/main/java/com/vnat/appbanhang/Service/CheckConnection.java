@@ -1,13 +1,9 @@
-package com.vnat.appbanhang.ultil;
+package com.vnat.appbanhang.Service;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.widget.Toast;
-
-/**
- * Created by Admin on 4/14/2018.
- */
 
 public class CheckConnection {
     public static boolean haveNetworkConnection(Context context) {

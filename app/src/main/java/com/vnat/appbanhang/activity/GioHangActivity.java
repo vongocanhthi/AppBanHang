@@ -36,7 +36,6 @@ public class GioHangActivity extends AppCompatActivity {
         actionToolbar();
         checkData();
         eventUtil();
-        // CatchonitemListView();
         eventButton();
     }
 
@@ -51,7 +50,7 @@ public class GioHangActivity extends AppCompatActivity {
         btnThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(MainActivity.mangGioHang.size()>0){
+                if(MainActivity.gioHangArrayList.size()>0){
                     Intent intent=new Intent(GioHangActivity.this,KhachHangActivity.class);
                     startActivity(intent);
                 }
@@ -62,55 +61,18 @@ public class GioHangActivity extends AppCompatActivity {
         });
     }
 
-    private void CatchonitemListView() {
-
-        lvGiohang.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int i, long l) {
-                Log.d("test11","chan doi");
-                final AlertDialog.Builder buidlder=new AlertDialog.Builder(GioHangActivity.this);
-                buidlder.setMessage("Bạn có chắc chắn muốn xóa sản phẩm này không ?");
-                buidlder.setIcon(android.R.drawable.ic_delete);
-                buidlder.setTitle("Xác nhận xóa");
-                buidlder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
-                buidlder.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int j) {
-                        MainActivity.mangGioHang.remove(i);
-                        gioHangAdapter.notifyDataSetChanged();
-                        if(MainActivity.mangGioHang.size()==0){
-                            tvThongbao.setVisibility(View.VISIBLE);
-                        }
-                        long tong=0;
-                        for(int i=0;i<MainActivity.mangGioHang.size();i++){
-                            tong+=MainActivity.mangGioHang.get(i).getGiasp();
-                        }
-                        tvTongtien.setText(tong+"");
-                    }
-                });
-                AlertDialog alertDialog=buidlder.create();
-                alertDialog.show();
-                return false;
-            }
-        });
-    }
 
     private void eventUtil() {
         long tongtien=0;
-        for(int i=0;i<MainActivity.mangGioHang.size();i++){
-            tongtien+=MainActivity.mangGioHang.get(i).getGiasp();
+        for(int i=0;i<MainActivity.gioHangArrayList.size();i++){
+            tongtien+=MainActivity.gioHangArrayList.get(i).getGiasp();
         }
         DecimalFormat decimalFomat=new DecimalFormat("###,###,###");
         tvTongtien.setText(decimalFomat.format(tongtien)+" Đ");
     }
 
     private void checkData() {
-        if(MainActivity.mangGioHang.size()<=0){
+        if(MainActivity.gioHangArrayList.size()<=0){
             gioHangAdapter.notifyDataSetChanged();
             tvThongbao.setVisibility(View.VISIBLE);
             lvGiohang.setVisibility(View.INVISIBLE);
@@ -136,13 +98,13 @@ public class GioHangActivity extends AppCompatActivity {
 
 
     private void anhXa() {
-        lvGiohang= (ListView) findViewById(R.id.lv_giohang);
-        tvThongbao= (TextView) findViewById(R.id.tv_thongbao);
-        tvTongtien= (TextView) findViewById(R.id.tv_tongtien);
-        btnThanhToan= (Button) findViewById(R.id.btn_thanhtoangiohang);
-        btnTieptucmua= (Button) findViewById(R.id.btn_tieptucmuahang);
-        toolbarGiohang= (Toolbar) findViewById(R.id.toolbar_giohang);
-        gioHangAdapter=new GioHangAdapter(GioHangActivity.this,MainActivity.mangGioHang);
+        lvGiohang= findViewById(R.id.lv_giohang);
+        tvThongbao= findViewById(R.id.tv_thongbao);
+        tvTongtien= findViewById(R.id.tv_tongtien);
+        btnThanhToan= findViewById(R.id.btn_thanhtoangiohang);
+        btnTieptucmua= findViewById(R.id.btn_tieptucmuahang);
+        toolbarGiohang= findViewById(R.id.toolbar_giohang);
+        gioHangAdapter=new GioHangAdapter(GioHangActivity.this,MainActivity.gioHangArrayList);
         lvGiohang.setAdapter(gioHangAdapter);
     }
 }

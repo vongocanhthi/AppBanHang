@@ -22,10 +22,6 @@ import com.vnat.appbanhang.model.GioHang;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-/**
- * Created by Admin on 4/17/2018.
- */
-
 public class GioHangAdapter extends BaseAdapter {
     Context context;
     ArrayList<GioHang> arryGioHang;
@@ -63,11 +59,10 @@ public class GioHangAdapter extends BaseAdapter {
         btnminus=view.findViewById(R.id.btn_minus);
         btnplus=view.findViewById(R.id.btn_plus);
         btnvalues=view.findViewById(R.id.btn_values);
+
         tvtengiohang.setText(arryGioHang.get(i).getTensp());
         final DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
         tvgiagiohang.setText(decimalFormat.format(arryGioHang.get(i).getGiasp())+" Đ");
-        Log.d("test", String.valueOf(arryGioHang.size()));
-        Log.d("test",arryGioHang.get(i).getHinhsp());
         Picasso.with(context).load(arryGioHang.get(i).getHinhsp()).centerCrop().resize(150,150).into(imggiohang);
         btnvalues.setText(arryGioHang.get(i).getSoluongsp()+"");
         final int sl= Integer.parseInt(btnvalues.getText().toString());
@@ -105,14 +100,14 @@ public class GioHangAdapter extends BaseAdapter {
                 buidlder.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int j) {
-                        MainActivity.mangGioHang.remove(i);
+                        MainActivity.gioHangArrayList.remove(i);
                         GioHangActivity.gioHangAdapter.notifyDataSetChanged();
-                        if(MainActivity.mangGioHang.size()==0){
+                        if(MainActivity.gioHangArrayList.size()==0){
                             GioHangActivity.tvThongbao.setVisibility(View.VISIBLE);
                         }
                         long tong=0;
-                        for(int i=0;i<MainActivity.mangGioHang.size();i++){
-                            tong+=MainActivity.mangGioHang.get(i).getGiasp();
+                        for(int i=0;i<MainActivity.gioHangArrayList.size();i++){
+                            tong+=MainActivity.gioHangArrayList.get(i).getGiasp();
                         }
                         GioHangActivity.tvTongtien.setText(tong+"");
                     }
@@ -129,12 +124,12 @@ public class GioHangAdapter extends BaseAdapter {
                 int slmoi= Integer.parseInt(btnvalues.getText().toString());
                 slmoi+=1;
                 btnvalues.setText(slmoi+"");
-                MainActivity.mangGioHang.get(i).setSoluongsp(slmoi);
-                MainActivity.mangGioHang.get(i).setGiasp(MainActivity.mangGioHang.get(i).getGiasp()*slmoi/(sl1));
-                tvgiagiohang.setText(MainActivity.mangGioHang.get(i).getGiasp()+"");
+                MainActivity.gioHangArrayList.get(i).setSoluongsp(slmoi);
+                MainActivity.gioHangArrayList.get(i).setGiasp(MainActivity.gioHangArrayList.get(i).getGiasp()*slmoi/(sl1));
+                tvgiagiohang.setText(MainActivity.gioHangArrayList.get(i).getGiasp()+"");
                 long tongtien=0;
-                for(int i=0;i<MainActivity.mangGioHang.size();i++){
-                    tongtien+=MainActivity.mangGioHang.get(i).getGiasp();
+                for(int i=0;i<MainActivity.gioHangArrayList.size();i++){
+                    tongtien+=MainActivity.gioHangArrayList.get(i).getGiasp();
                 }
                 DecimalFormat decimalFormat1=new DecimalFormat("###,###,###");
                 GioHangActivity.tvTongtien.setText(decimalFormat1.format(tongtien)+" Đ");
@@ -158,12 +153,12 @@ public class GioHangAdapter extends BaseAdapter {
                 int slmoi= Integer.parseInt(btnvalues.getText().toString());
                 slmoi-=1;
                 btnvalues.setText(slmoi+"");
-                MainActivity.mangGioHang.get(i).setSoluongsp(slmoi);
-                MainActivity.mangGioHang.get(i).setGiasp(MainActivity.mangGioHang.get(i).getGiasp()*slmoi/(sl1));
-                tvgiagiohang.setText(MainActivity.mangGioHang.get(i).getGiasp()+"");
+                MainActivity.gioHangArrayList.get(i).setSoluongsp(slmoi);
+                MainActivity.gioHangArrayList.get(i).setGiasp(MainActivity.gioHangArrayList.get(i).getGiasp()*slmoi/(sl1));
+                tvgiagiohang.setText(MainActivity.gioHangArrayList.get(i).getGiasp()+"");
                 long tongtien=0;
-                for(int i=0;i<MainActivity.mangGioHang.size();i++){
-                    tongtien+=MainActivity.mangGioHang.get(i).getGiasp();
+                for(int i=0;i<MainActivity.gioHangArrayList.size();i++){
+                    tongtien+=MainActivity.gioHangArrayList.get(i).getGiasp();
                 }
                 DecimalFormat decimalFormat1=new DecimalFormat("###,###,###");
                 GioHangActivity.tvTongtien.setText(decimalFormat1.format(tongtien)+" Đ");

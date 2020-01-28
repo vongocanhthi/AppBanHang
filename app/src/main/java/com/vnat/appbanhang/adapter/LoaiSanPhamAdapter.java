@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.vnat.appbanhang.R;
-import com.vnat.appbanhang.model.Loaisp;
+import com.vnat.appbanhang.model.LoaiSanPham;
 
 import java.util.ArrayList;
 
@@ -20,12 +20,10 @@ import java.util.ArrayList;
 
 public class LoaiSanPhamAdapter extends BaseAdapter {
     Context context;
-    int layout;
-    ArrayList<Loaisp> arrLoaiSp=new ArrayList<>();
+    ArrayList<LoaiSanPham> arrLoaiSp;
 
-    public LoaiSanPhamAdapter(Context context, int layout, ArrayList<Loaisp> arrLoaiSp) {
+    public LoaiSanPhamAdapter(Context context, ArrayList<LoaiSanPham> arrLoaiSp) {
         this.context = context;
-        this.layout = layout;
         this.arrLoaiSp = arrLoaiSp;
     }
 
@@ -47,20 +45,12 @@ public class LoaiSanPhamAdapter extends BaseAdapter {
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
         LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        view=layoutInflater.inflate(layout,null);
+        view=layoutInflater.inflate(R.layout.dong_listview_loaisp,null);
         TextView tvTenloaisp=view.findViewById(R.id.tv_loaisp);
         ImageView imgloaisp=view.findViewById(R.id.img_loaisp);
-        tvTenloaisp.setText(arrLoaiSp.get(i).getTenLoaiSanPham());
-        Picasso.with(context).load(arrLoaiSp.get(i).getHinhAnhLoaiSanPham()).centerCrop().resize(150,150).into(imgloaisp);
-//        view.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Log.d("test1","t2");
-//                Intent intent=new Intent(context, ChiTietActivity.class);
-//                intent.putExtra("chitietsanpham",arrLoaiSp.get(i));
-//                context.startActivity(intent);
-//            }
-//        });
+        tvTenloaisp.setText(arrLoaiSp.get(i).getTenloaisp());
+        Picasso.with(context).load(arrLoaiSp.get(i).getHinhanhloaisp()).centerCrop().resize(150,150).into(imgloaisp);
+
         return view;
     }
 

@@ -1,5 +1,17 @@
 package com.vnat.appbanhang.activity;
 
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.Toast;
+import android.widget.ViewFlipper;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -7,36 +19,17 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Toast;
-import android.widget.ViewFlipper;
-
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 import com.vnat.appbanhang.R;
+import com.vnat.appbanhang.Service.ApiService;
+import com.vnat.appbanhang.Service.CheckConnection;
+import com.vnat.appbanhang.Service.DataService;
 import com.vnat.appbanhang.adapter.LoaiSanPhamAdapter;
 import com.vnat.appbanhang.adapter.SanPhamAdapter;
 import com.vnat.appbanhang.model.GioHang;
-import com.vnat.appbanhang.model.Loaisp;
+import com.vnat.appbanhang.model.LoaiSanPham;
 import com.vnat.appbanhang.model.SanPham;
-import com.vnat.appbanhang.ultil.CheckConnection;
-import com.vnat.appbanhang.ultil.Server;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,23 +43,26 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    ArrayList<Loaisp> mangloaisp;
-    ArrayList<SanPham> mangSanpham;
-    SanPhamAdapter sanphamAdapter;
-    LoaiSanPhamAdapter loaispAdapter;
+    static ArrayList<LoaiSanPham> loaiSanPhamArrayList;
+    static ArrayList<SanPham> sanPhamArrayList;
+    static SanPhamAdapter sanPhamAdapter;
+    LoaiSanPhamAdapter loaiSanPhamAdapter;
     DrawerLayout drawerLayout;
     Animation in, out;
     Toolbar toolbar;
     ViewFlipper viewFlipper;
-    RecyclerView recyclerViewManHinhChinh;
+    RecyclerView rccSanPhamMoiNhat;
     NavigationView navigationView;
     ListView lvManHinhChinh;
-    int id = 0;
-    String tenloaisp = "";
-    String hinhanhloaisp = "";
-    public static ArrayList<GioHang> mangGioHang;
+    public static DataService dataService;
+    public static ArrayList<GioHang> gioHangArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,161 +77,123 @@ public class MainActivity extends AppCompatActivity {
             getdulieuSpmoinhat();
             catchOnItemListView();
         } else {
-            CheckConnection.showToast_Short(MainActivity.this, "khong co ket noi intenret");
+            CheckConnection.showToast_Short(getApplicationContext(), "Không có kết nối intenret");
             finish();
         }
     }
 
     private void catchOnItemListView() {
-        lvManHinhChinh.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                switch (i) {
-                    case 0: {
-                        if (CheckConnection.haveNetworkConnection(MainActivity.this)) {
-                            Intent intent = new Intent(MainActivity.this, MainActivity.class);
-                            startActivity(intent);
-
-                        }
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                        break;
+        lvManHinhChinh.setOnItemClickListener((adapterView, view, i, l) -> {
+            switch (i) {
+                case 0: {
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    break;
+                }
+                case 1: {
+                    if (CheckConnection.haveNetworkConnection(MainActivity.this)) {
+                        Intent intent = new Intent(MainActivity.this, DienThoaiActivity.class);
+                        intent.putExtra("iddienthoai", 1);
+                        startActivity(intent);
                     }
-                    case 1: {
-                        if (CheckConnection.haveNetworkConnection(MainActivity.this)) {
-                            Intent intent = new Intent(MainActivity.this, DienThoaiActivity.class);
-                            intent.putExtra("iddienthoai", 1);
-                            startActivity(intent);
-                        } else {
-                        }
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                        break;
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    break;
+                }
+                case 2: {
+                    if (CheckConnection.haveNetworkConnection(MainActivity.this)) {
+                        Intent intent = new Intent(MainActivity.this, LapTopActivity.class);
+                        intent.putExtra("idlaptop", 2);
+                        startActivity(intent);
                     }
-                    case 2: {
-                        if (CheckConnection.haveNetworkConnection(MainActivity.this)) {
-                            Intent intent = new Intent(MainActivity.this, LapTopActivity.class);
-                            intent.putExtra("idlaptop", 2);
-                            startActivity(intent);
-                        } else {
-                        }
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                        break;
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    break;
+                }
+                case 3: {
+                    if (CheckConnection.haveNetworkConnection(MainActivity.this)) {
+                        Intent intent = new Intent(MainActivity.this, LienHeActivity.class);
+                        startActivity(intent);
                     }
-                    case 3: {
-                        if (CheckConnection.haveNetworkConnection(MainActivity.this)) {
-                            Intent intent = new Intent(MainActivity.this, LienHeActivity.class);
-                            startActivity(intent);
-                        }
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                        break;
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    break;
+                }
+                case 4: {
+                    if (CheckConnection.haveNetworkConnection(MainActivity.this)) {
+                        Intent intent = new Intent(MainActivity.this, ThongTinActivity.class);
+                        startActivity(intent);
                     }
-                    case 4: {
-                        if (CheckConnection.haveNetworkConnection(MainActivity.this)) {
-                            Intent intent = new Intent(MainActivity.this, ThongTinActivity.class);
-                            startActivity(intent);
-                        }
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                        break;
-                    }
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    break;
                 }
             }
         });
     }
 
     private void getdulieuloaisp() {
-        final RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
-        final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.duongdanloaisp, new Response.Listener<JSONArray>() {
+        Call<List<LoaiSanPham>> call = dataService.getLoaiSanPham();
+        call.enqueue(new Callback<List<LoaiSanPham>>() {
             @Override
-            public void onResponse(JSONArray response) {
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject object = response.getJSONObject(i);
-                        id = object.getInt("idloaisp");
-                        tenloaisp = object.getString("tenloaisp");
-                        hinhanhloaisp = object.getString("hinhanhloaisp");
-                        mangloaisp.add(new Loaisp(id, tenloaisp, hinhanhloaisp));
-                        loaispAdapter.notifyDataSetChanged();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+            public void onResponse(Call<List<LoaiSanPham>> call, Response<List<LoaiSanPham>> response) {
+                if (response.body() != null) {
+                    loaiSanPhamArrayList.addAll(response.body());
                 }
-                mangloaisp.add(new Loaisp(0, "Liên Hệ", "https://shopvnat.000webhostapp.com/HinhAnh/Icon/ic_contact.png"));
-                mangloaisp.add(new Loaisp(0, "Thông Tin", "https://shopvnat.000webhostapp.com/HinhAnh/Icon/ic_info.png"));
-                loaispAdapter.notifyDataSetChanged();
+                loaiSanPhamArrayList.add(new LoaiSanPham(0, "Liên Hệ", "https://shopvnat.000webhostapp.com/HinhAnh/Icon/ic_contact.png"));
+                loaiSanPhamArrayList.add(new LoaiSanPham(0, "Thông Tin", "https://shopvnat.000webhostapp.com/HinhAnh/Icon/ic_info.png"));
+                loaiSanPhamAdapter.notifyDataSetChanged();
             }
-        }, new Response.ErrorListener() {
+
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onFailure(Call<List<LoaiSanPham>> call, Throwable t) {
+
             }
         });
-        requestQueue.add(jsonArrayRequest);
     }
     private void getdulieuSpmoinhat() {
-        final RequestQueue request = Volley.newRequestQueue(MainActivity.this);
-        JsonArrayRequest json = new JsonArrayRequest(Server.duongdansanphammoinhat,new Response.Listener<JSONArray>() {
+        Call<List<SanPham>> call = dataService.getSanPhamMoiNhat();
+        call.enqueue(new Callback<List<SanPham>>() {
             @Override
-            public void onResponse(JSONArray response) {
-                int id = 0, gia = 0;
-                String tensanham = "";
-                String mota = "", hinhanh = "";
-                int idsp = 0;
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject object = response.getJSONObject(i);
-                        id = object.getInt("idsp");
-                        tensanham = object.getString("tensp");
-                        gia = object.getInt("giasp");
-                        hinhanh = object.getString("hinhanhsp");
-                        mota = object.getString("motasp");
-                        idsp = object.getInt("idloaisp");
-                        mangSanpham.add(new SanPham(id, tensanham, gia, hinhanh, mota, idsp));
-                        sanphamAdapter.notifyDataSetChanged();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+            public void onResponse(Call<List<SanPham>> call, Response<List<SanPham>> response) {
+                if (response.body() != null) {
+                    sanPhamArrayList.addAll(response.body());
                 }
+                sanPhamAdapter.notifyDataSetChanged();
             }
-        }, new Response.ErrorListener() {
+
             @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("kiemtra", error.toString());
-                Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<List<SanPham>> call, Throwable t) {
+
             }
         });
-        request.add(json);
+
     }
     private void actionBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Trang chủ");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(android.R.drawable.ic_menu_sort_by_size);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                drawerLayout.openDrawer(GravityCompat.START);
-            }
-        });
+        toolbar.setNavigationOnClickListener(view -> drawerLayout.openDrawer(GravityCompat.START));
     }
 
     private void anhXa() {
+        dataService = ApiService.getService();
         in = AnimationUtils.loadAnimation(MainActivity.this, R.anim.fade_in);
         out = AnimationUtils.loadAnimation(MainActivity.this, R.anim.fade_out);
         toolbar = findViewById(R.id.toolbar_manhinhchinh);
         viewFlipper = findViewById(R.id.viewflipper);
-        recyclerViewManHinhChinh = findViewById(R.id.recyclerview);
+        rccSanPhamMoiNhat = findViewById(R.id.rccSanPhamMoiNhat);
         navigationView = findViewById(R.id.navigationview);
         lvManHinhChinh = findViewById(R.id.lv_manhinhchinh);
         drawerLayout = findViewById(R.id.drawerlayout);
-        mangloaisp = new ArrayList<>();
-        mangloaisp.add(new Loaisp(0, "Trang chủ", "https://shopvnat.000webhostapp.com/HinhAnh/Icon/ic_home.png"));
-        loaispAdapter = new LoaiSanPhamAdapter(MainActivity.this, R.layout.dong_listview_loaisp, mangloaisp);
-        lvManHinhChinh.setAdapter(loaispAdapter);
-        mangSanpham = new ArrayList<SanPham>();
-        sanphamAdapter = new SanPhamAdapter(MainActivity.this, mangSanpham);
-        recyclerViewManHinhChinh.setHasFixedSize(true);
-        recyclerViewManHinhChinh.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
-        recyclerViewManHinhChinh.setAdapter(sanphamAdapter);
-        if (mangGioHang == null) {
-            mangGioHang = new ArrayList<>();
+        loaiSanPhamArrayList = new ArrayList<>();
+        loaiSanPhamArrayList.add(new LoaiSanPham(0, "Trang chủ", "https://shopvnat.000webhostapp.com/HinhAnh/Icon/ic_home.png"));
+        loaiSanPhamAdapter = new LoaiSanPhamAdapter(getApplicationContext(), loaiSanPhamArrayList);
+        lvManHinhChinh.setAdapter(loaiSanPhamAdapter);
+        sanPhamArrayList = new ArrayList<>();
+        sanPhamAdapter = new SanPhamAdapter(getApplicationContext(), sanPhamArrayList);
+
+        rccSanPhamMoiNhat.setHasFixedSize(true);
+        rccSanPhamMoiNhat.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
+        rccSanPhamMoiNhat.setAdapter(sanPhamAdapter);
+        if (gioHangArrayList == null) {
+            gioHangArrayList = new ArrayList<>();
         }
     }
 
@@ -283,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
                 InputStream inputStream=httpURLConnection.getInputStream();
                 InputStreamReader inputStreamReader=new InputStreamReader(inputStream);
                 BufferedReader bufferedReader=new BufferedReader(inputStreamReader);
-                String line="";
+                String line;
                 while ((line=bufferedReader.readLine())!=null){
                     stringBuilder.append(line);
                 }
@@ -301,22 +259,17 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
             try {
                 JSONArray jsonArray=new JSONArray(s);
-                int id = 0, gia = 0;
-                String tensanham = "";
-                String mota = "", hinhanh = "";
-                int idsp = 0;
-                Log.d("kiemtra",jsonArray.toString()+"chn doi");
                 for (int i = 0; i < jsonArray.length(); i++) {
                     try {
                         JSONObject object = jsonArray.getJSONObject(i);
-                        id = object.getInt("idsp");
-                        tensanham = object.getString("tensp");
-                        gia = object.getInt("giasp");
-                        hinhanh = object.getString("hinhanhsp");
-                        mota = object.getString("motasp");
-                        idsp = object.getInt("idloaisp");
-                        mangSanpham.add(new SanPham(id, tensanham, gia, hinhanh, mota, idsp));
-                        sanphamAdapter.notifyDataSetChanged();
+                        sanPhamArrayList.add(new SanPham(object.getInt("idsp")
+                                ,object.getString("tensp")
+                                ,object.getInt("giasp")
+                                ,object.getString("hinhanhsp")
+                                ,object.getString("motasp")
+                                ,object.getInt("idloaisp")
+                                ,object.getInt("idhang")));
+                        sanPhamAdapter.notifyDataSetChanged();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -326,4 +279,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+
 }

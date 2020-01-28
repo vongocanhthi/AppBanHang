@@ -1,7 +1,6 @@
 package com.vnat.appbanhang.adapter;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,10 +67,14 @@ public class DienThoaiAdapter extends BaseAdapter {
 
         DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
         SanPham sanPham = arrayDienThoai.get(i);
-        viewHolder.tvtendienthoai.setText(sanPham.getTensanpham());
-        viewHolder.tvGiadienthoai.setText("Giá :"+decimalFormat.format(sanPham.getGiasanpham())+" Đ");
-        viewHolder.tvMota.setText(sanPham.getMotasanpham());
-        Picasso.with(context).load(sanPham.getHinhanhsanpham()).centerCrop().resize(150,150).into(viewHolder.imgdienthoai);
+        viewHolder.tvtendienthoai.setText(sanPham.getTensp());
+        viewHolder.tvGiadienthoai.setText("Giá :"+decimalFormat.format(sanPham.getGiasp())+" Đ");
+        viewHolder.tvMota.setText(sanPham.getMotasp());
+        Picasso.with(context).load(sanPham.getHinhanhsp())
+                .centerCrop().resize(150,150)
+                .placeholder(R.drawable.ic_no_image)
+                .error(R.drawable.ic_error)
+                .into(viewHolder.imgdienthoai);
         return view;
     }
 

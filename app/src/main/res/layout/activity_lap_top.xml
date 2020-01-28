@@ -8,12 +8,28 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_laptop"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
+        android:layout_height="wrap_content"
         android:background="@android:color/holo_blue_light"
-        android:title="Máy Tính"
-        app:titleTextColor="@android:color/white">
+        android:title="Laptop"
+        app:titleTextColor="@android:color/white"/>
 
-    </androidx.appcompat.widget.Toolbar>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Spinner
+            android:layout_weight="1"
+            android:id="@+id/spinnerSapXep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Spinner
+            android:layout_weight="1"
+            android:id="@+id/spinnerHang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
     <ListView
         android:id="@+id/lv_laptop"
         android:layout_width="match_parent"

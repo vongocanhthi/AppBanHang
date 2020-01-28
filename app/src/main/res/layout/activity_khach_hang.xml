@@ -32,13 +32,15 @@
             android:id="@+id/edt_sdt"
             android:hint="Nhập số điện thoại"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
         <EditText
             android:layout_marginTop="35dp"
             android:hint="Nhập email"
             android:id="@+id/edt_email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"/>
         <LinearLayout
             android:layout_marginTop="35dp"
             android:orientation="horizontal"

@@ -66,10 +66,14 @@ public class LapTopAdapter extends BaseAdapter {
 
         DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
         SanPham sanPham = arrayLapTop.get(i);
-        viewHolder.tvTen.setText(sanPham.getTensanpham());
-        viewHolder.tvGia.setText("Giá "+decimalFormat.format(sanPham.getGiasanpham())+" Đ");
-        viewHolder.tvMoTa.setText(sanPham.getMotasanpham());
-        Picasso.with(context).load(sanPham.getHinhanhsanpham()).centerCrop().resize(150,150).into(viewHolder.imgHinhanh);
+        viewHolder.tvTen.setText(sanPham.getTensp());
+        viewHolder.tvGia.setText("Giá "+decimalFormat.format(sanPham.getGiasp())+" Đ");
+        viewHolder.tvMoTa.setText(sanPham.getMotasp());
+        Picasso.with(context).load(sanPham.getHinhanhsp())
+                .centerCrop().resize(150,150)
+                .placeholder(R.drawable.ic_no_image)
+                .error(R.drawable.ic_error)
+                .into(viewHolder.imgHinhanh);
         return view;
     }
 

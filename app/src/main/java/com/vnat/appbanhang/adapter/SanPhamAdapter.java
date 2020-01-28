@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,12 +36,11 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.itemHold
 
     @Override
     public void onBindViewHolder(itemHolder holder, int position) {
-        SanPham sanPham=new SanPham();
-        sanPham=arrayListSanpham.get(position);
-        holder.tvTensanpham.setText(sanPham.getTensanpham());
+        SanPham sanPham = arrayListSanpham.get(position);
+        holder.tvTensanpham.setText(sanPham.getTensp());
         DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
-        holder.tvGiasanpham.setText("Giá :"+decimalFormat.format(sanPham.getGiasanpham())+" Đ");
-        Picasso.with(context).load(sanPham.getHinhanhsanpham()).centerCrop().resize(150,150).into(holder.imgHinhAnhSanpham);
+        holder.tvGiasanpham.setText("Giá :"+decimalFormat.format(sanPham.getGiasp())+" Đ");
+        Picasso.with(context).load(sanPham.getHinhanhsp()).centerCrop().resize(150,150).into(holder.imgHinhAnhSanpham);
     }
 
     @Override
@@ -66,8 +64,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.itemHold
                 public void onClick(View view) {
                     Intent intent=new Intent(context, ChiTietActivity.class);
                     intent.putExtra("chitietsanpham",arrayListSanpham.get(getPosition()));
-                    //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    Toast.makeText(context, arrayListSanpham.get(getPosition()).getTensanpham(), Toast.LENGTH_SHORT).show();
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                 }
             });

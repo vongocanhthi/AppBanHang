@@ -12,11 +12,13 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <ImageView
-                android:background="@drawable/newico"
-                android:layout_gravity="top|right"
-                android:layout_width="41dp"
-                android:layout_height="40dp" />
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_new"
+                android:layout_gravity="top|right"/>
+
             <LinearLayout
                 android:gravity="center"
                 android:layout_gravity="center"
@@ -30,7 +32,7 @@
                     android:layout_height="100dp" />
                 <TextView
                     android:gravity="center"
-                    android:text="san pham"
+                    android:text="Tên sản phẩm"
                     android:textSize="20sp"
                     android:id="@+id/tv_tensanpham"
                     android:layout_width="wrap_content"
@@ -38,7 +40,7 @@
                     android:textColor="#000000"/>
                 <TextView
                     android:id="@+id/tv_giasanpham"
-                    android:text="gia"
+                    android:text="Giá sản phẩm"
                     android:textColor="#C92114"
                     android:textSize="17sp"
                     android:layout_width="wrap_content"

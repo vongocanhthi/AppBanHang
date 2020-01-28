@@ -1,16 +1,14 @@
 package com.vnat.appbanhang.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -47,21 +45,20 @@ public class KhachHangActivity extends AppCompatActivity {
                 final String ten=edttenkhachhang.getText().toString();
                 final String sdt=edtsdt.getText().toString();
                 final String email=edtemail.getText().toString();
-                if(ten.length()>0&&sdt.length()>0&&email.length()>0){
+                if(ten.length()>0 && sdt.length()>0 && email.length()>0){
                     final RequestQueue requestQueue= Volley.newRequestQueue(KhachHangActivity.this);
                     StringRequest stringRequest=new StringRequest(Request.Method.POST, Server.duongdandonhang, new Response.Listener<String>() {
                         @Override
                         public void onResponse(final String madonhang) {
-                            Log.d("madonhang",madonhang);
                             if(Integer.parseInt(madonhang)>0){
-                                RequestQueue requestQueue1=Volley.newRequestQueue(KhachHangActivity.this);
-                                StringRequest stringRequest1=new StringRequest(Request.Method.POST, Server.duongdanchitietdonhang, new Response.Listener<String>() {
+                                RequestQueue requestQueue1 = Volley.newRequestQueue(KhachHangActivity.this);
+                                StringRequest stringRequest1 = new StringRequest(Request.Method.POST, Server.duongdanchitietdonhang, new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
-                                        if(response.equals("success")){
-                                            MainActivity.mangGioHang.clear();
+                                        if(response.equals("1")){
+                                            MainActivity.gioHangArrayList.clear();
                                             Toast.makeText(KhachHangActivity.this, "Bạn đã thêm giỏ hàng thành công", Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(KhachHangActivity.this,MainActivity.class));
+                                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
                                             Toast.makeText(KhachHangActivity.this, "Mời bạn tiếp tục mua hàng", Toast.LENGTH_SHORT).show();
                                         }
                                         else{
@@ -75,22 +72,22 @@ public class KhachHangActivity extends AppCompatActivity {
                                     }
                                 }){
                                     @Override
-                                    protected Map<String, String> getParams() throws AuthFailureError {
+                                    protected Map<String, String> getParams() {
                                         JSONArray jsonArray=new JSONArray();
-                                        for(int i=0;i<MainActivity.mangGioHang.size();i++){
+                                        for(int i=0;i<MainActivity.gioHangArrayList.size();i++){
                                             JSONObject jsonObject=new JSONObject();
                                             try {
                                                 jsonObject.put("madonhang",madonhang);
-                                                jsonObject.put("masanpham",MainActivity.mangGioHang.get(i).getIdsp());
-                                                jsonObject.put("tensanpham",MainActivity.mangGioHang.get(i).getTensp());
-                                                jsonObject.put("giasanpham",MainActivity.mangGioHang.get(i).getGiasp());
-                                                jsonObject.put("soluongsanpham",MainActivity.mangGioHang.get(i).getSoluongsp());
+                                                jsonObject.put("masanpham",MainActivity.gioHangArrayList.get(i).getIdsp());
+                                                jsonObject.put("tensanpham",MainActivity.gioHangArrayList.get(i).getTensp());
+                                                jsonObject.put("giasanpham",MainActivity.gioHangArrayList.get(i).getGiasp());
+                                                jsonObject.put("soluongsanpham",MainActivity.gioHangArrayList.get(i).getSoluongsp());
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
                                             }
                                             jsonArray.put(jsonObject);
                                         }
-                                        HashMap<String,String> hashMap=new HashMap<String, String>();
+                                        HashMap<String,String> hashMap= new HashMap<>();
                                         hashMap.put("json",jsonArray.toString());
                                         return hashMap;
                                     }
@@ -105,8 +102,8 @@ public class KhachHangActivity extends AppCompatActivity {
                         }
                     }){
                         @Override
-                        protected Map<String, String> getParams() throws AuthFailureError {
-                            HashMap<String,String>hashMap=new HashMap<String, String>();
+                        protected Map<String, String> getParams() {
+                            HashMap<String, String> hashMap = new HashMap<>();
                             hashMap.put("tenkhachhang",ten);
                             hashMap.put("sodienthoai",sdt);
                             hashMap.put("email",email);
@@ -129,10 +126,10 @@ public class KhachHangActivity extends AppCompatActivity {
     }
 
     private void anhXa() {
-        edttenkhachhang= (EditText) findViewById(R.id.edt_tenkhachhang);
-        edtemail= (EditText) findViewById(R.id.edt_email);
-        edtsdt= (EditText) findViewById(R.id.edt_sdt);
-        btnTroVe= (Button) findViewById(R.id.btn_trove);
-        btnXacNhan= (Button) findViewById(R.id.btn_xacnhan);
+        edttenkhachhang= findViewById(R.id.edt_tenkhachhang);
+        edtemail= findViewById(R.id.edt_email);
+        edtsdt= findViewById(R.id.edt_sdt);
+        btnTroVe= findViewById(R.id.btn_trove);
+        btnXacNhan= findViewById(R.id.btn_xacnhan);
     }
 }
